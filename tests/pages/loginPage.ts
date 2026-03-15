@@ -6,6 +6,7 @@ export class LoginPage {
   readonly passwordInput: Locator;
   readonly loginBtn: Locator;
   readonly logoutBtn: Locator;
+  readonly returnToLoginBtn: Locator;
   readonly errorMessage: Locator;
 
   constructor(page: Page) {
@@ -14,6 +15,7 @@ export class LoginPage {
     this.passwordInput = page.getByTestId('password');
     this.loginBtn = page.getByTestId('login-btn');
     this.logoutBtn = page.getByTestId('logout-btn');
+    this.returnToLoginBtn = page.getByTestId('return-to-login-btn');
     this.errorMessage = page.getByTestId('error-message');
   }
 

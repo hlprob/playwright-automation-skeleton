@@ -32,7 +32,10 @@ test.describe('Login', () => {
     await loginPage.login('test@example.com', 'password123');
     await loginPage.logout();
 
-    // TODO: assert successful logout (e.g. redirect back to login)
-    await expect(page).toHaveURL('/login');
+    // TODO: assert logout page URL
+    await expect(page).toHaveURL('/logout');
+
+    // TODO: assert return to login button is visible
+    await expect(loginPage.returnToLoginBtn).toBeVisible();
   });
 });
