@@ -16,6 +16,9 @@ import { paymentLocators } from '../locators/paymentLocators';
 const fixturesPath = path.join(__dirname, '../fixtures/paymentData.json');
 
 test.describe('Payment', () => {
+  // serial mode ensures CC runs before ACH — required because CC writes fixture data that ACH reads.
+  // Without this, fullyParallel in playwright.config.ts would run them simultaneously and break ACH.
+  test.describe.configure({ mode: 'serial' });
   test.beforeEach(async ({ page }) => {
     await page.goto('/pay/faker-national-bank');
   });
