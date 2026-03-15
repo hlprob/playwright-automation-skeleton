@@ -47,3 +47,7 @@ This skeleton is ready to run once you swap in your application's real values:
 5. Fill in the `TODO` sections in the spec files with your test logic
 6. Update `testData/index.ts` with your real static test data
 7. Use `fixtures/paymentData.json` for data that needs to be shared between tests
+
+## Auth State
+
+Once your tests require authenticated pages, use Playwright's [`storageState`](https://playwright.dev/docs/auth) to save and restore login state — avoiding a full UI login in every test that needs an authenticated user.
