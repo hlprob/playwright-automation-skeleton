@@ -5,6 +5,7 @@ export class LoginPage {
   readonly emailInput: Locator;
   readonly passwordInput: Locator;
   readonly loginBtn: Locator;
+  readonly logoutBtn: Locator;
   readonly errorMessage: Locator;
 
   constructor(page: Page) {
@@ -12,6 +13,7 @@ export class LoginPage {
     this.emailInput = page.getByTestId('email');
     this.passwordInput = page.getByTestId('password');
     this.loginBtn = page.getByTestId('login-btn');
+    this.logoutBtn = page.getByTestId('logout-btn');
     this.errorMessage = page.getByTestId('error-message');
   }
 
@@ -23,5 +25,9 @@ export class LoginPage {
     await this.emailInput.fill(email);
     await this.passwordInput.fill(password);
     await this.loginBtn.click();
+  }
+
+  async logout() {
+    await this.logoutBtn.click();
   }
 }

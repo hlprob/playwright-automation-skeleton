@@ -23,4 +23,16 @@ test.describe('Login', () => {
     // TODO: assert error message
     await expect(loginPage.errorMessage).toBeVisible();
   });
+
+  test('should log out successfully', async ({ page }) => {
+    const loginPage = new LoginPage(page);
+    await loginPage.visit();
+
+    // TODO: update test IDs to match the login form
+    await loginPage.login('test@example.com', 'password123');
+    await loginPage.logout();
+
+    // TODO: assert successful logout (e.g. redirect back to login)
+    await expect(page).toHaveURL('/login');
+  });
 });
