@@ -28,7 +28,7 @@ test.describe('Authentication', () => {
     const loginPage = new LoginPage(page);
     await loginPage.visit();
 
-    // TODO: update test IDs to match the login form
+    // TODO: update test IDs
     await loginPage.login('test@example.com', 'password123');
     await loginPage.logoutBtn.click();
 

@@ -43,7 +43,7 @@ This skeleton is ready to run once you swap in your application's real values:
 1. Update `baseURL` in `playwright.config.ts` to point to your application
 2. Update `page.goto()` paths in the spec files to match your real routes
 3. Replace `data-testid` values in the locator files and page objects with your actual element test IDs
-4. Implement page object methods in the page files
+4. Add page objects for additional pages
 5. Fill in the `TODO` sections in the spec files with your test logic
 6. Update `testData/index.ts` with your real static test data
 7. Use `fixtures/paymentData.json` for data that needs to be shared between tests
