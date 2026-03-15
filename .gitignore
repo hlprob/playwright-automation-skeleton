@@ -17,4 +17,5 @@ npm-debug.log*
 test-results/
 playwright-report/
 .playwright/
-tests/fixtures/generated/
+tests/fixtures/generated/*
+!tests/fixtures/generated/.gitkeep

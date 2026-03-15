@@ -28,8 +28,4 @@ export class LoginPage {
     await this.passwordInput.fill(password);
     await this.loginBtn.click();
   }
-
-  async logout() {
-    await this.logoutBtn.click();
-  }
 }

@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/loginPage';
 
-test.describe('Login', () => {
+test.describe('Authentication', () => {
   test('should log in successfully with valid credentials', async ({ page }) => {
     const loginPage = new LoginPage(page);
     await loginPage.visit();
@@ -30,7 +30,7 @@ test.describe('Login', () => {
 
     // TODO: update test IDs to match the login form
     await loginPage.login('test@example.com', 'password123');
-    await loginPage.logout();
+    await loginPage.logoutBtn.click();
 
     // TODO: assert logout page URL
     await expect(page).toHaveURL('/logout');

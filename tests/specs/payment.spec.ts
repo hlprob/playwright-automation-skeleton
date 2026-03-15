@@ -15,48 +15,44 @@ import { paymentLocators } from '../locators/paymentLocators';
 
 const fixturesPath = path.join(__dirname, '../fixtures/paymentData.json');
 
-test.describe('Payment Form', () => {
+test.describe('Payment', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/pay/faker-national-bank');
   });
 
-  test.describe('Credit Card Payment', () => {
-    test('should submit a CC payment successfully', async ({ page }) => {
-      const payerName = 'Test User';
+  test('should submit a CC payment successfully', async ({ page }) => {
+    const payerName = 'Test User';
 
-      // Read fixture and write payerName before test runs
-      const data = JSON.parse(fs.readFileSync(fixturesPath, 'utf-8'));
-      fs.writeFileSync(fixturesPath, JSON.stringify({ ...data, payerName }));
+    // Read fixture and write payerName before test runs
+    const data = JSON.parse(fs.readFileSync(fixturesPath, 'utf-8'));
+    fs.writeFileSync(fixturesPath, JSON.stringify({ ...data, payerName }));
 
-      // TODO: update test IDs to match the payment form
-      await page.getByTestId(paymentLocators.typeCc).click();
-      await page.getByTestId(paymentLocators.payerName).fill(payerName);
-      await page.getByTestId(paymentLocators.ccNumber).fill(creditCard.number);
-      await page.getByTestId(paymentLocators.ccExpiration).fill(creditCard.expirationDate);
-      await page.getByTestId(paymentLocators.ccCvv).fill(creditCard.cvv);
-      await page.getByTestId(paymentLocators.amount).fill('1.00');
-      await page.getByTestId(paymentLocators.submitBtn).click();
+    // TODO: update test IDs to match the payment form
+    await page.getByTestId(paymentLocators.typeCc).click();
+    await page.getByTestId(paymentLocators.payerName).fill(payerName);
+    await page.getByTestId(paymentLocators.ccNumber).fill(creditCard.number);
+    await page.getByTestId(paymentLocators.ccExpiration).fill(creditCard.expirationDate);
+    await page.getByTestId(paymentLocators.ccCvv).fill(creditCard.cvv);
+    await page.getByTestId(paymentLocators.amount).fill('1.00');
+    await page.getByTestId(paymentLocators.submitBtn).click();
 
-      // TODO: assert successful payment submission
-      await expect(page.getByTestId(paymentLocators.successMessage)).toBeVisible();
-    });
+    // TODO: assert successful payment submission
+    await expect(page.getByTestId(paymentLocators.successMessage)).toBeVisible();
   });
 
-  test.describe('ACH Payment', () => {
-    test('should submit an ACH payment successfully', async ({ page }) => {
-      // Read payerName written during CC test
-      const data = JSON.parse(fs.readFileSync(fixturesPath, 'utf-8'));
+  test('should submit an ACH payment successfully', async ({ page }) => {
+    // Read payerName written during CC test
+    const data = JSON.parse(fs.readFileSync(fixturesPath, 'utf-8'));
 
-      // TODO: update test IDs to match the payment form
-      await page.getByTestId(paymentLocators.typeAch).click();
-      await page.getByTestId(paymentLocators.payerName).fill(data.payerName);
-      await page.getByTestId(paymentLocators.routingNumber).fill(ach.routingNumber);
-      await page.getByTestId(paymentLocators.accountNumber).fill(ach.accountNumber);
-      await page.getByTestId(paymentLocators.amount).fill('1.00');
-      await page.getByTestId(paymentLocators.submitBtn).click();
+    // TODO: update test IDs to match the payment form
+    await page.getByTestId(paymentLocators.typeAch).click();
+    await page.getByTestId(paymentLocators.payerName).fill(data.payerName);
+    await page.getByTestId(paymentLocators.routingNumber).fill(ach.routingNumber);
+    await page.getByTestId(paymentLocators.accountNumber).fill(ach.accountNumber);
+    await page.getByTestId(paymentLocators.amount).fill('1.00');
+    await page.getByTestId(paymentLocators.submitBtn).click();
 
-      // TODO: assert successful payment submission
-      await expect(page.getByTestId(paymentLocators.successMessage)).toBeVisible();
-    });
+    // TODO: assert successful payment submission
+    await expect(page.getByTestId(paymentLocators.successMessage)).toBeVisible();
   });
 });
