@@ -1,11 +1,18 @@
 import { Page, Locator } from '@playwright/test';
-import { locators } from '../locators/loginLocators';
 
 export class LoginPage {
   readonly page: Page;
+  readonly emailInput: Locator;
+  readonly passwordInput: Locator;
+  readonly loginBtn: Locator;
+  readonly errorMessage: Locator;
 
   constructor(page: Page) {
     this.page = page;
+    this.emailInput = page.getByTestId('email');
+    this.passwordInput = page.getByTestId('password');
+    this.loginBtn = page.getByTestId('login-btn');
+    this.errorMessage = page.getByTestId('error-message');
   }
 
   async visit() {
@@ -13,12 +20,8 @@ export class LoginPage {
   }
 
   async login(email: string, password: string) {
-    await this.page.fill(locators.login.emailInput, email);
-    await this.page.fill(locators.login.passwordInput, password);
-    await this.page.click(locators.login.loginBtn);
-  }
-
-  getErrorMessage(): Locator {
-    return this.page.locator(locators.login.errorMessage);
+    await this.emailInput.fill(email);
+    await this.passwordInput.fill(password);
+    await this.loginBtn.click();
   }
 }

@@ -10,9 +10,10 @@ tests/
     login.spec.ts         # Login test skeleton
     payment.spec.ts       # Payment test skeleton (CC and ACH)
   pages/
-    loginPage.ts          # Login page object
+    loginPage.ts          # Login page object with readonly Locator properties
   locators/
-    loginLocators.ts      # Login and payment element selectors
+    paymentLocators.ts    # Payment test IDs — used with page.getByTestId() in the spec.
+                          # Login locators live in loginPage.ts since it has a page object.
   fixtures/
     paymentData.json      # Dynamic fixture data (written/read between tests)
     generated/            # Gitignored — for data written during test runs.
@@ -41,7 +42,7 @@ This skeleton is ready to run once you swap in your application's real values:
 
 1. Update `baseURL` in `playwright.config.ts` to point to your application
 2. Update `page.goto()` paths in the spec files to match your real routes
-3. Replace `data-cy` selectors in the locator files with your actual element selectors
+3. Replace `data-testid` values in the locator files and page objects with your actual element test IDs
 4. Implement page object methods in the page files
 5. Fill in the `TODO` sections in the spec files with your test logic
 6. Update `testData/index.ts` with your real static test data

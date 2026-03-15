@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import * as fs from 'fs';
 import * as path from 'path';
 import { creditCard, ach } from '../testData/index';
-import { locators } from '../locators/loginLocators';
+import { paymentLocators } from '../locators/paymentLocators';
 
 // NOTE: The CC and ACH tests are intentionally dependent — the CC test writes payerName
 // to the fixture, and the ACH test reads it back. This is a skeleton example of the
@@ -23,17 +23,17 @@ test.describe('Payment Form', () => {
       const data = JSON.parse(fs.readFileSync(fixturesPath, 'utf-8'));
       fs.writeFileSync(fixturesPath, JSON.stringify({ ...data, payerName }));
 
-      // TODO: update selectors to match the payment form
-      await page.click(locators.payment.typeCc);
-      await page.fill(locators.payment.payerName, payerName);
-      await page.fill(locators.payment.ccNumber, creditCard.number);
-      await page.fill(locators.payment.ccExpiration, creditCard.expirationDate);
-      await page.fill(locators.payment.ccCvv, creditCard.cvv);
-      await page.fill(locators.payment.amount, '1.00');
-      await page.click(locators.payment.submitBtn);
+      // TODO: update test IDs to match the payment form
+      await page.getByTestId(paymentLocators.typeCc).click();
+      await page.getByTestId(paymentLocators.payerName).fill(payerName);
+      await page.getByTestId(paymentLocators.ccNumber).fill(creditCard.number);
+      await page.getByTestId(paymentLocators.ccExpiration).fill(creditCard.expirationDate);
+      await page.getByTestId(paymentLocators.ccCvv).fill(creditCard.cvv);
+      await page.getByTestId(paymentLocators.amount).fill('1.00');
+      await page.getByTestId(paymentLocators.submitBtn).click();
 
       // TODO: assert successful payment submission
-      await expect(page.locator(locators.payment.successMessage)).toBeVisible();
+      await expect(page.getByTestId(paymentLocators.successMessage)).toBeVisible();
     });
   });
 
@@ -42,16 +42,16 @@ test.describe('Payment Form', () => {
       // Read payerName written during CC test
       const data = JSON.parse(fs.readFileSync(fixturesPath, 'utf-8'));
 
-      // TODO: update selectors to match the payment form
-      await page.click(locators.payment.typeAch);
-      await page.fill(locators.payment.payerName, data.payerName);
-      await page.fill(locators.payment.routingNumber, ach.routingNumber);
-      await page.fill(locators.payment.accountNumber, ach.accountNumber);
-      await page.fill(locators.payment.amount, '1.00');
-      await page.click(locators.payment.submitBtn);
+      // TODO: update test IDs to match the payment form
+      await page.getByTestId(paymentLocators.typeAch).click();
+      await page.getByTestId(paymentLocators.payerName).fill(data.payerName);
+      await page.getByTestId(paymentLocators.routingNumber).fill(ach.routingNumber);
+      await page.getByTestId(paymentLocators.accountNumber).fill(ach.accountNumber);
+      await page.getByTestId(paymentLocators.amount).fill('1.00');
+      await page.getByTestId(paymentLocators.submitBtn).click();
 
       // TODO: assert successful payment submission
-      await expect(page.locator(locators.payment.successMessage)).toBeVisible();
+      await expect(page.getByTestId(paymentLocators.successMessage)).toBeVisible();
     });
   });
 });

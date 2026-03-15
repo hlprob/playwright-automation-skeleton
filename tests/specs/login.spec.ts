@@ -6,7 +6,7 @@ test.describe('Login', () => {
     const loginPage = new LoginPage(page);
     await loginPage.visit();
 
-    // TODO: update selectors to match the login form
+    // TODO: update test IDs to match the login form
     await loginPage.login('test@example.com', 'password123');
 
     // TODO: assert successful login (e.g. redirect, welcome message)
@@ -17,10 +17,10 @@ test.describe('Login', () => {
     const loginPage = new LoginPage(page);
     await loginPage.visit();
 
-    // TODO: update selectors to match the login form
+    // TODO: update test IDs to match the login form
     await loginPage.login('invalid@example.com', 'wrongpassword');
 
     // TODO: assert error message
-    await expect(loginPage.getErrorMessage()).toBeVisible();
+    await expect(loginPage.errorMessage).toBeVisible();
   });
 });
