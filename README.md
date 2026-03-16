@@ -51,3 +51,7 @@ This skeleton is ready to run once you swap in your application's real values:
 ## Auth State
 
 Once your tests require authenticated pages, use Playwright's [`storageState`](https://playwright.dev/docs/auth) to save and restore login state — avoiding a full UI login in every test that needs an authenticated user.
+
+## Network Interception
+
+Use [`page.route()`](https://playwright.dev/docs/network) to intercept, stub, or modify HTTP requests during tests — useful for controlling API responses, simulating error states, or testing loading behavior without a real backend.
